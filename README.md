@@ -2,6 +2,9 @@
 
 A modern and easy to use 32/64-bit shellcode template, ported to Rust from the original [Stardust](https://github.com/Cracked5pider/Stardust) project by [C5pider](https://twitter.com/C5pider).
 
+![8D0BEA19-E728-42F4-A625-797765F4993B_1_201_a](https://github.com/user-attachments/assets/f687aa32-d9f1-46f0-9216-b139cbe344ac)
+
+
 ## About
 
 This project is a Rust implementation of the Stardust design, which provides a modern approach to position-independent code development. The original Stardust project introduced several key innovations in shellcode design:
