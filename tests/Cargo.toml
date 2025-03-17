@@ -1,0 +1,11 @@
+[package]
+name = "stomper"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "stomper"
+path = "stomper.rs"
+
+[dependencies]
+windows = { version = "0.48", features = ["Win32_System_Memory"] }

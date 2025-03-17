@@ -1,0 +1,27 @@
+[package]
+name = "stardust"
+version = "0.1.0"
+edition = "2021"
+authors = ["Stardust Team"]
+description = "A modern and easy to use 32/64-bit shellcode template in Rust"
+
+[lib]
+name = "stardust"
+crate-type = ["staticlib", "cdylib"]
+
+[build-dependencies]
+cc = "1.0"
+
+[features]
+default = []
+debug = []
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+panic = "abort"
