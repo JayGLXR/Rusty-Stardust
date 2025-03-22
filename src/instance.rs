@@ -11,7 +11,7 @@ type FnGetProcAddress = unsafe extern "system" fn(hModule: HMODULE, lpProcName: 
 type FnMessageBoxA = unsafe extern "system" fn(hWnd: PVOID, lpText: PSTR, lpCaption: PSTR, uType: u32) -> i32;
 
 #[cfg(feature = "debug")]
-type FnDbgPrint = unsafe extern "system" fn(Format: PCH, ...) -> i32;
+type FnDbgPrint = unsafe extern "C" fn(Format: PCH, ...) -> i32;
 
 // Keep resolve_import macro but mark it as #[allow(unused_macros)] since it might be needed later
 #[allow(unused_macros)]
@@ -42,7 +42,7 @@ macro_rules! dbg_printf {
                     // Format like the original: [DEBUG::function::line] message
                     let prefix = symbol::<PCH>(concat!("[DEBUG::", file!(), "::", line!(), "] ").as_ptr());
                     let msg = symbol::<PCH>($fmt.as_ptr());
-                    ($instance.ntdll.DbgPrint)(prefix, msg, $($arg),*);
+                    (*$instance.ntdll.DbgPrint)(prefix, msg, $($arg),*);
                 }
             }
         }
@@ -161,7 +161,7 @@ impl Instance {
             if !user32.is_null() {
                 dbg_printf!(self, "oh wow look we loaded user32.dll -> %p\n", user32);
             } else {
-                dbg_printf!(self, "okay something went wrong. failed to load user32 :/\n");
+                dbg_printf!(self, "okay something went wrong. failed to load user32 :/\n",);
             }
             
             let peb = NtCurrentPeb();
