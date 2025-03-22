@@ -92,6 +92,7 @@ pub struct PEB {
     pub Mutant: HANDLE,
     pub ImageBaseAddress: PVOID,
     pub Ldr: *mut PEB_LDR_DATA,
+    pub ProcessParameters: *mut RTL_USER_PROCESS_PARAMETERS,
     // ... other fields not needed for our purposes
 }
 pub type PPEB = *mut PEB;
